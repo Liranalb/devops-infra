@@ -1,8 +1,8 @@
 FROM python:3.11-slim
-WORKDIR /app
 RUN pip install uv
+WORKDIR /app
 COPY app/requirements.txt .
-RUN uv pip install -r requirements.txt
+RUN uv pip install --system -r requirements.txt
 COPY app/ .
-EXPOSE 5000
+EXPOSE 5050
 CMD ["python", "app.py"]
