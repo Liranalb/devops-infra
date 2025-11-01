@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-infra-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-infra-app
+  template:
+    metadata:
+      labels:
+        app: devops-infra-app
+    spec:
+      containers:
+      - name: devops-infra-app
+        image: devops-infra:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5050
