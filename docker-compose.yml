@@ -6,19 +6,20 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin123
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     volumes:
       - mongo_data:/data/db
 
   app:
     build: .
     container_name: devops-infra-app
+    env_file: .env
     environment:
-      - PORT=5050
-      - MONGO_URI=mongodb://admin:admin123@mongo:27017/?authSource=admin&directConnection=true
+      PORT: ${APP_PORT}
+      MONGO_URI: ${MONGO_URI}
     ports:
-      - "5050:5050"
+      - "${APP_PORT}:${APP_PORT}"
     depends_on:
       - mongo
 
