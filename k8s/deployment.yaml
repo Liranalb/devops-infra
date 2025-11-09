@@ -17,22 +17,12 @@ spec:
         image: devops-infra:latest
         imagePullPolicy: Never
         ports:
-        - containerPort: 5000
+        - containerPort: 5050
         env:
+        - name: PORT
+          value: "5050"
         - name: MONGO_URI
           valueFrom:
             secretKeyRef:
               name: mongo-conn
               key: MONGO_URI
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 5000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 5000
-          initialDelaySeconds: 15
-          periodSeconds: 10
