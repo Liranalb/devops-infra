@@ -34,3 +34,6 @@ def create_item():
         return jsonify(error="name is required"), 400
     col.insert_one({"name": data["name"], "value": data.get("value")})
     return jsonify(created=True), 201
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=PORT)
